@@ -111,6 +111,17 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   $settings['cache']['bins']['form'] = 'cache.backend.database'; // Use the database for forms */
 }
 
+/**
+ * Load the secrets set by terminus-secrets-plugin.
+ *
+ * Any type of secrets can be loaded using the following code snippet
+ * in any of the settings.php files.
+ */
+if (file_exists('/files/private/secrets.json')) {
+  $secrets = json_decode(file_get_contents('/files/private/secrets.json'), true);
+  $config['decoupled_preview.dp_preview_site.nextjs_demo']['secret']  = $secrets['example_decoupled_preview.secret'];
+}
+
 
 /**
  * Environment Indicator settings.
@@ -123,6 +134,8 @@ $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
 if ($is_local_env) {
   $config['environment_indicator.indicator']['name'] = 'Local';
   $config['environment_indicator.indicator']['bg_color'] = '#3363aa';
+  // Load services definition file specific to Decoupled.
+  $settings['container_yamls'][] = __DIR__ . '/cors.decoupled.services.yml';
 }
 
 if ($is_pantheon_dev_env){
@@ -139,4 +152,3 @@ if ($is_pantheon_prod_env) {
   $config['environment_indicator.indicator']['name'] = 'Live';
   $config['environment_indicator.indicator']['bg_color'] = '#aa3333';
 }
-

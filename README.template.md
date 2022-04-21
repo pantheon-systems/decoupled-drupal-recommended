@@ -42,6 +42,32 @@ Sync dev environment database and files to local environment:
 lando pull --database=dev --files=dev --code=none
 ```
 
+## Managing secrets
+
+Install [terminus-secrets-plugin](https://github.com/pantheon-systems/terminus-secrets-plugin):
+
+```
+terminus self:plugin:install pantheon-systems/terminus-secrets-plugin
+terminus self:plugin:reload
+```
+After that use the following terminus commands to set a secret value in your pantheon site:
+
+- To set a secret:
+  ```
+  terminus secrets:set siteName.env preview.secret value
+  ```
+  For example, if we wanted to set a secret for the example decoupled preview site created by the Pantheon Decoupled module, we could use the following command:
+  ```
+  terminus secrets:set decoupled-drupal.dev example_decoupled_preview.secret mySecret
+  ```
+
+In this example, the key name for the secret is `example_decoupled_preview.secret`. If set, this value is used in [decoupled.settings.php](web/sites/default/decoupled.settings.php) to overwrite the related preview site entity. A similar approach could be used in other project settings files.
+
+Get complete list of available commands for terminus-secrets-plugin:
+```
+terminus list secret
+```
+
 ## Decoupled Preview
 
 Decoupled preview can be configured at admin/structure/dp-preview-site
