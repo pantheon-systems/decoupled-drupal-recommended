@@ -1,0 +1,33 @@
+name: %SITE_NAME%
+recipe: pantheon
+config:
+  framework: drupal9
+  site: %SITE_NAME%
+  xdebug: false
+
+# events:
+#   post-start:
+#     - appserver: composer install
+services:
+  appserver:
+    xdebug: false
+    config:
+      php: .vscode/php.ini
+    overrides:
+      environment:
+        XDEBUG_MODE: null
+tooling:
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for nginx.
+    cmd: >-
+      docker-php-ext-enable xdebug && pkill -o -USR2 php-fpm && echo "Enabling
+      xdebug"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: CUSTOM Disable xdebug for nginx.
+    cmd: >-
+      rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2
+      php-fpm && echo "Disabling xdebug"
+    user: root

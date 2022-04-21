@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Exit immediately on errors.
+set -e
+
+#
+# Project create and install tasks (avoid hacking build:project:create command).
+#
+function project-tasks() {
+ # Generate lando config.
+  setup_lando
+}
+
+
+
+#
+# Setup local devleopment environment.
+#
+function setup_lando() {
+  # Check for existing lando files.
+  if [[
+      ( ! -f ".lando.yml" )
+  ]]; then
+    echo "📂 💨  Generating Lando configuration file..."
+      terminus lando:setup
+    echo "✅ Done!"
+  fi
+}
+
+project-tasks
+
+
