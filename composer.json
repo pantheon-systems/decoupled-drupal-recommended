@@ -1,5 +1,5 @@
 {
-  "name": "pantheon-systems/decoupled-drupal",
+  "name": "pantheon-systems/decoupled-drupal-recommended",
   "description": "Install Decoupled Drupal 9 with Composer on Pantheon.",
   "type": "project",
   "license": "GPL-2.0+",
@@ -11,22 +11,6 @@
     {
       "type": "path",
       "url": "upstream-configuration"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:pantheon-systems/decoupled_preview.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:pantheon-systems/drupal_pantheon_decoupled.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:pantheon-systems/drupal_pantheon_decoupled_profile.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:pantheon-systems/drupal_pantheon_decoupled_umami_demo.git"
     }
   ],
   "require": {
@@ -35,8 +19,8 @@
     "drupal/config_split": "^1.7",
     "drupal/core-composer-scaffold": "^9.2",
     "drupal/core-recommended": "^9.2",
-    "drupal/pantheon_decoupled_profile": "dev-main",
-    "drupal/pantheon_decoupled_umami_demo": "dev-main",
+    "drupal/pantheon_decoupled_profile": "^1.0@alpha",
+    "drupal/pantheon_decoupled_umami_demo": "^1.0@alpha",
     "drupal/redis": "^1.5",
     "drush/drush": "^10",
     "pantheon-systems/drupal-integrations": "^9",
