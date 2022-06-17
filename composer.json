@@ -26,6 +26,9 @@
     "pantheon-systems/drupal-integrations": "^9",
     "pantheon-upstreams/upstream-configuration": "*"
   },
+  "require-dev": {
+    "drupal/drupal-extension": "^4.2"
+  },
   "conflict": {
     "drupal/drupal": "*"
   },
@@ -88,18 +91,11 @@
       ],
       "export-configuration": "drush config-export --yes"
     },
-    "patches": {
-      "drupal/core": {
-        "1356276#675: Allow profiles to define a base/parent profile": "https://www.drupal.org/files/issues/2021-11-18/1356276-675.patch"
-      },
-      "drupal/decoupled_router": {
-        "3111456#34: Unable to resolve path on node in other language than default": "https://www.drupal.org/files/issues/2021-05-05/3111456-34.patch"
-      }
-    },
     "composer-exit-on-patch-failure": true,
     "patchLevel": {
       "drupal/core": "-p2"
     },
+    "enable-patching": true,
     "drupal-scaffold": {
       "allowed-packages": [
         "pantheon-systems/drupal-integrations"

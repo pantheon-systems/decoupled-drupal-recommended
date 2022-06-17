@@ -42,6 +42,49 @@ Sync dev environment database and files to local environment:
 lando pull --database=dev --files=dev --code=none
 ```
 
+## Run Behat locally
+- `lando behat`: Run behat test case.
+- For more info: https://docs.behat.org/en/v2.5/guides/6.cli.html
+
+## Enabling Xdebug
+The following lando commands can be used to toggle xdebug:
+ - `lando xdebug-on`: Enable xdebug.
+ - `lando xdebug-off`: Disable xdebug.
+
+Xdebug can also be enabled permanently by making the following changes:
+
+1. Edit `.lando.yml`:
+   ```yaml
+   config:
+     framework: drupal9
+     site: decoupled-drupal-dev-sandbox
+     xdebug: true
+   ...
+   services:
+     appserver:
+       xdebug: debug
+       config:
+         php: .vscode/php.ini
+   ```
+2. Rebuild your Lando instances by running `lando rebuild -y` & install the site.
+
+The following changes are required to be done for the respective IDE:
+
+For PhpStorm:
+- On the PhpStorm toolbar, toggle ![debug icon](https://resources.jetbrains.com/help/img/idea/2022.1/php.icons.debug_listen_off_dark.svg) to start listening for incoming PHP debug connections, or choose **Run | Start Listening for PHP Debug Connections** from the main menu.
+- Go to PhpStorm's Preferences dialog (`⌘`+`,`) >> PHP >> Servers. Create a new server by clicking on the + icon and set the following config:
+  - Name: `localhost`
+  - Host: `localhost`
+  - Port: `80`
+  - Debugger: `Xdebug`
+  - Enable **Use path mappings (select if the server is remote or symlinks are used)** and map web root to `/app/web`
+
+For VSCode:
+- Install and enable the extension: [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug)
+- Go to the debug tab(`⌘`+`⇧`+`D`)
+- Select the correct debug configuration and click on start listening (`F5`)
+
+
 ## Managing secrets
 
 Install [terminus-secrets-plugin](https://github.com/pantheon-systems/terminus-secrets-plugin):

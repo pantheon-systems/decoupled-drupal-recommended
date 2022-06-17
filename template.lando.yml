@@ -31,3 +31,7 @@ tooling:
       rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2
       php-fpm && echo "Disabling xdebug"
     user: root
+  behat:
+    description: Run behat tests.
+    cmd:
+      - appserver: /app/vendor/bin/behat --config=/app/tests/behat/behat-lando.yml

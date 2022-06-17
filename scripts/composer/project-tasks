@@ -14,7 +14,7 @@ function project-tasks() {
 
 
 #
-# Setup local devleopment environment.
+# Setup local development environment.
 #
 function setup_lando() {
   # Check for existing lando files.
@@ -25,6 +25,16 @@ function setup_lando() {
       terminus lando:setup
     echo "✅ Done!"
   fi
+  # Check for existing behat config files.
+    if [[
+                  ( ! -f "./drush/lando.aliases.drushrc.php" )
+    ]] && [[
+                  ( ! -f "./test/behat/behat-lando.yml" )
+    ]]; then
+      echo "📂 💨  Generating ./drush/lando.aliases.drushrc.php & ./test/behat/behat-lando.yml"
+        terminus lando:behat
+      echo "✅ Done!"
+    fi
 }
 
 project-tasks
